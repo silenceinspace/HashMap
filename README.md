@@ -1,8 +1,3 @@
-### Initial project setup:
-1. Run `npm install .` to install devDependencies for eslint and prettier.
-2. 
+### Thoughts
 
-
-### Future ideas:
-- [ ] Expand my configs
-- [ ] Add VSCode settings
+This project has been only recently added to TOP. The fact makes it understandable why some things stated in the assignment are not as clear as one may expect. In the first place, I implemented the wrong hash map data structure which quickly resulted into me questioning my understanding of it. However, I ended up discussing the unclear moments with a person on the discord server and I realized where I had made mistakes. I began picking up on what I was supposed to do from that momemnt. Eventually, my understanding of this data structure is pretty solid to an extent I may try to help someone else with it. And I also consider creating a pull request on github to suggest some improvements for this lesson.
