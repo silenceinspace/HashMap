@@ -1,4 +1,5 @@
-import { LinkedList, Node } from './linked_list';
+import { LinkedList, Node } from './linked_list.js';
+import { arrInput } from './input.js';
 
 class HashMap {
   constructor(size) {
@@ -188,7 +189,10 @@ class HashMap {
 }
 
 const hashTable = new HashMap(8);
-console.log(hashTable);
+
+arrInput.forEach(pair => {
+  hashTable.set(pair[0], pair[1]);
+});
 
 // ***
 // console.log(hashTable.hashMap[6]);
@@ -199,3 +203,6 @@ console.log(hashTable);
 //     throw new Error('Trying to access index out of bound');
 //   }
 // };
+
+console.log(hashTable.entries());
+console.log(hashTable.values());
