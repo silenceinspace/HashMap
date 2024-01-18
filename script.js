@@ -206,3 +206,7 @@ arrInput.forEach(pair => {
 
 console.log(hashTable.entries());
 console.log(hashTable.values());
+console.log(hashTable.get('Chloe'));
+console.log(hashTable.remove('Chloe'));
+console.log(hashTable.get('Chloe'));
+console.log(hashTable.length());
