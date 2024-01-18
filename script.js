@@ -112,10 +112,13 @@ class HashMap {
     let hashCode = 0;
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
-      hashCode = primeNumber * hashCode + key.charCodeAt(i);
+      // BigInt() will take care of numbers that cannot be stored as primitive numbers to avoid accuracy issues
+      hashCode = BigInt(primeNumber) * BigInt(hashCode) + BigInt(key.charCodeAt(i));
     }
 
-    return hashCode % this.hashMap.length;
+    const bigIntHash = BigInt(hashCode) % BigInt(this.hashMap.length);
+    const numberHash = Number(bigIntHash);
+    return numberHash;
   }
 
   set(key, value) {
@@ -248,27 +251,13 @@ class HashMap {
 
 const hashTable = new HashMap(8);
 console.log(hashTable);
-console.log(hashTable.hash('Dj'));
-console.log(hashTable.set('Dj', 'Hi!'));
-console.log(hashTable.get('Dj'));
-console.log(hashTable.set('Dj', 'Different hi:D!'));
-console.log(hashTable.get('Dj'));
-console.log(hashTable.has('Dj'));
-console.log(hashTable.remove('Dj'));
-
-console.log(hashTable.set('New dj', 'new hi'));
-console.log(hashTable.length());
-console.log(hashTable.keys());
-console.log(hashTable.values());
-console.log(hashTable.entries());
-console.log(hashTable.clear());
 
 // ***
 // console.log(hashTable.hashMap[6]);
 // console.log(hashTable.hashMap[16]);
-//  Should I implement this restriction on a prototype of my class' array hashMap
-const accessBucketThroughIndex = (mainBucket, index) => {
-  if (index < 0 || index >= mainBucket.hashMap.length) {
-    throw new Error('Trying to access index out of bound');
-  }
-};
+//  Should I implement this restriction on a prototype of my class' array hashMap?
+// const accessBucketThroughIndex = (mainBucket, index) => {
+//   if (index < 0 || index >= mainBucket.hashMap.length) {
+//     throw new Error('Trying to access index out of bound');
+//   }
+// };
