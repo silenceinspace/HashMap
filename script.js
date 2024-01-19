@@ -1,66 +1,5 @@
-class Node {
-  constructor(key, value, next = null) {
-    this.key = key;
-    this.value = value;
-    this.next = next;
-  }
-}
-
-class LinkedList {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.size = 0;
-  }
-
-  append(node) {
-    if (this.head === null) {
-      this.head = node;
-      this.tail = node;
-    } else {
-      let currentNode = this.head;
-      while (currentNode.next !== null) {
-        currentNode = currentNode.next;
-      }
-
-      currentNode.next = node;
-      this.tail = node;
-    }
-    this.size++;
-  }
-
-  find(key) {
-    let node = this.head;
-    while (node.key !== key) {
-      node = node.next;
-      if (!node) return null;
-    }
-
-    return node;
-  }
-
-  remove(key) {
-    let node = this.head;
-    if (node.key === key) {
-      this.head = node.next;
-      this.tail = node.next;
-    } else {
-      let previous;
-      while (node.key !== key) {
-        previous = node;
-        node = node.next;
-      }
-
-      if (!node.next) {
-        previous.next = null;
-        this.tail = previous;
-      } else {
-        previous.next = node.next;
-      }
-    }
-    this.size--;
-  }
-}
+import { LinkedList, Node } from './linked_list.js';
+import { arrInput } from './input.js';
 
 class HashMap {
   constructor(size) {
@@ -78,7 +17,7 @@ class HashMap {
     let usedCapacity = 0;
     let bucketContainsFourCollisions = false;
 
-    this.hashMap.forEach((bucket) => {
+    this.hashMap.forEach(bucket => {
       if (bucket) {
         usedCapacity += 1;
 
@@ -101,7 +40,7 @@ class HashMap {
     this.hashMap = this.#createHashMapOfSize(this.capacity * 2);
     this.capacity = this.capacity * 2;
 
-    storedKeysAndValues.forEach((pair) => {
+    storedKeysAndValues.forEach(pair => {
       const key = pair.at(0);
       const value = pair.at(1);
       this.set(key, value);
@@ -193,7 +132,7 @@ class HashMap {
 
   length() {
     let length = 0;
-    this.hashMap.forEach((bucket) => {
+    this.hashMap.forEach(bucket => {
       if (bucket) {
         length += bucket.size;
       }
@@ -203,7 +142,7 @@ class HashMap {
 
   keys() {
     const array = [];
-    this.hashMap.forEach((bucket) => {
+    this.hashMap.forEach(bucket => {
       if (bucket) {
         let node = bucket.head;
         while (node) {
@@ -217,7 +156,7 @@ class HashMap {
 
   values() {
     const array = [];
-    this.hashMap.forEach((bucket) => {
+    this.hashMap.forEach(bucket => {
       if (bucket) {
         let node = bucket.head;
         while (node) {
@@ -231,7 +170,7 @@ class HashMap {
 
   entries() {
     const array = [];
-    this.hashMap.forEach((bucket) => {
+    this.hashMap.forEach(bucket => {
       if (bucket) {
         let node = bucket.head;
         while (node) {
@@ -250,7 +189,10 @@ class HashMap {
 }
 
 const hashTable = new HashMap(8);
-console.log(hashTable);
+
+arrInput.forEach(pair => {
+  hashTable.set(pair[0], pair[1]);
+});
 
 // ***
 // console.log(hashTable.hashMap[6]);
@@ -261,3 +203,10 @@ console.log(hashTable);
 //     throw new Error('Trying to access index out of bound');
 //   }
 // };
+
+console.log(hashTable.entries());
+console.log(hashTable.values());
+console.log(hashTable.get('Chloe'));
+console.log(hashTable.remove('Chloe'));
+console.log(hashTable.get('Chloe'));
+console.log(hashTable.length());
